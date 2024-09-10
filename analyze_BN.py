@@ -18,8 +18,15 @@ import DC_data.spectrum_downsample as DS
 
 config = 1
 if(config == 1):
-    dir_data = Path(r'Desktop/Noise_Manual/2024_09_11_Beatnote_Evaluation/data/proc')
-    filename_core = '--trace20khz--00002'
+    dir_data = Path(r'Desktop/Noise_Manual/2024_09_11_Beatnote_Evaluation/data/proc') # Path
+    filename_core = '--trace20khz--00002' # Filename
+
+    # Processing settings
+    downsample_BN = False # Select if we have to downsample the data (needs to be done only once)
+    meas_frep = False # Select if frep should also be determined experimentally
+    flip_BN_order = False # Select if order of beat-notes should be flipped
+
+    # Measurement parameters
 
 # %% interferogram analysis
 ch1_filename_stem =  r'C1' + filename_core
@@ -27,10 +34,6 @@ ch2_filename_stem =  r'C2' + filename_core
 IGM_filename_stem =  r'C3' + filename_core
 BN_filename_stem = r'BN' + filename_core 
 frep_filename_stem = r'frep' + filename_core 
-
-downsample_BN = False
-meas_frep = False
-flip_BN_order = False
 
 sp = dcd.SimParameters(f_rep                    = 1041e6,
                        Df_rep_approx            = 20e3,   # needed to do preprocessing steps where Df is found more accurately
