@@ -29,7 +29,7 @@ def downsample_function(yf_full, sp, f0, fBW):
 
     return DS_data
 
-def downsample_beatnotes(sp, n_plot = 1000000, meas_frep = False):  
+def downsample_beatnotes(sp, select_higher_BN, n_plot = 1000000, meas_frep = False):  
     #sp.nt = 1000000
     
     y_mmap = np.load(sp.file_stem_ch1.parent / (sp.file_stem_ch1.name + '.npy'), mmap_mode='r+')
@@ -44,16 +44,21 @@ def downsample_beatnotes(sp, n_plot = 1000000, meas_frep = False):
     yf_full_ch1_plot = np.fft.fft(y_data_ch1[0:n_plot]) 
     yf_full_ch2_plot = np.fft.fft(y_data_ch2[0:n_plot]) 
         
+    if (select_higher_BN):
+        f_lim = sp.f_rep
+    else:
+        f_lim = sp.f_rep/2
+        
     fig, ax = plt.subplots(1, 2)
     ax[0].plot(np.fft.fftshift(f_grid_plot) * 1e-6, abs(np.fft.fftshift(yf_full_ch1_plot)))
-    ax[0].set_xlim(0, sp.f_rep/2 * 1e-6)
+    ax[0].set_xlim(0, f_lim * 1e-6)
     ax[0].set_yscale('log')
     ax[0].set_xlabel('RF Frequency (MHz)')
     ax[0].set_ylabel('Amplitude (a.u.)')
     ax[0].set_title('Channel 1')
 
     ax[1].plot(np.fft.fftshift(f_grid_plot) * 1e-6, abs(np.fft.fftshift(yf_full_ch2_plot)))
-    ax[1].set_xlim(0, sp.f_rep/2 * 1e-6)
+    ax[1].set_xlim(0, f_lim * 1e-6)
     ax[1].set_yscale('log')
     ax[1].set_xlabel('RF Frequency (MHz)')
     ax[1].set_ylabel('Amplitude (a.u.)')

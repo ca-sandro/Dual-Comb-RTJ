@@ -48,7 +48,9 @@ model = dcd.DataProcessCore(sp)
 # %% Downsample the beatnotes
 BN_filename = BN_filename_stem + r'.pickle'
 if (downsample_BN == True):
-    BN_data = DS.downsample_beatnotes(sp, n_plot=1000000)
+    BN_data = DS.downsample_beatnotes(sp, 
+                                      select_higher_BN = select_higher_BN)
+    
     with open(dir_data / BN_filename, 'wb') as f:
         pickle.dump(BN_data, f)
 else:
