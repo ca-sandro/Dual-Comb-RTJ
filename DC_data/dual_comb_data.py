@@ -22,17 +22,18 @@ class SimParameters(basics.functions.ParametersInterface):
                          'nt'
                          ]
         
-        DEFAULT_VALS = {'N_PREPROCESS_MAX'      : 50, 
-                        'N_PROCESS_MAX'         : np.inf,
-                        'PREPROCESS_PEAK_TOL'   : 0.1,
-                        'PREPROCESS_PEAK_HEIGHT': 0.5,
-                        'PREPROCESS_PEAK_FLUC'  : 1e-2,
-                        'PROCESS_PEAK_POW'      : 2,
-                        'PEAK_SEARCH_TOL'       : 1e-2, 
-                        'N_PERIODS_DF_AV_MAX'   : 10,
-                        'TRIGGER_ZOOM_SCALE'    : 8,
-                        'TPK_REFINE_SCALE_TIME' : 20, 
-                        'FREQ_CENTER_OVERRIDE'  : None,
+        DEFAULT_VALS = {'N_PREPROCESS_MAX'      : 10,     # approximate number of interferograms to analyze to infer IGM properties
+                        'N_PROCESS_MAX'         : np.inf, # how many periods to process
+                        'PREPROCESS_PEAK_TOL'   : 0.1,    # How much are peaks separated (in x * Dfrep), input to scipy.signal.find_peaks(distance = )
+                        'PREPROCESS_PEAK_HEIGHT': 0.5,    # How high are peaks (in x * max_height), input to scipy.signal.find_peaks(height = )
+                        'PREPROCESS_PEAK_FLUC'  : 1e-2,   # Maximum amont of fluctuation in estimated peaks (used as sanity-check)
+                        'PROCESS_PEAK_POW'      : 4,      # Power in peak search using center-of-mass
+                        'N_PERIODS_DF_AV_MAX'   : 10,     # How many periods to average to estimate Df_rep
+
+                        'PEAK_SEARCH_TOL'       : 1e-2,   # Region (x * 1/Dfrep) to serach for next peak with coarse peak search (based on scipy.signal.find_peaks())
+                        'TPK_REFINE_SCALE_TIME' : 20,     # Region (x * t_FWHM) to serach for next peak with refined peak search (based on moment-integral)
+                        'TRIGGER_ZOOM_SCALE'    : 8,      # Region (x * t_FWHM) to zoom on peak to extract its properties (f_center and FWHM in frequency domain)
+                        'FREQ_CENTER_OVERRIDE'  : None,   # Can select new f_center of RF dual-comb (if algorithm does not provide accurate estimate)
                         }
         
         self.init_vars(DEFAULT_VALS, REQUIRED_ARGS, kwargs)

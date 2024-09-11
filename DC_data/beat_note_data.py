@@ -260,7 +260,7 @@ class DataProcess:
             if(f_shift_if_negative and (frep_data is not None)):
                 f0_BN_diff += self.frep_data[0]['f_rep_estimate']
             else:
-                raise('Error - negative f0_BN_diff measured; select beat-notes above f_rep/2 or flip channels)')
+                raise('Error - negative f0_BN_diff measured; \n (A): flip channels, or \n (B): select beat-notes above f_rep/2)')
 
         # Get beat-note phase at IGM peaks
         phi_BN_diff_downsampled = np.interp(tpk_vec, np.fft.fftshift(self.t_grid), self.BN_double['phi_vec_prod'])
