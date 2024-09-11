@@ -29,7 +29,7 @@ def downsample_function(yf_full, sp, f0, fBW):
 
     return DS_data
 
-def downsample_beatnotes(sp, meas_frep = True, n_plot = 1000000):  
+def downsample_beatnotes(sp, n_plot = 1000000, meas_frep = False):  
     #sp.nt = 1000000
     
     y_mmap = np.load(sp.file_stem_ch1.parent / (sp.file_stem_ch1.name + '.npy'), mmap_mode='r+')
@@ -75,7 +75,7 @@ def downsample_beatnotes(sp, meas_frep = True, n_plot = 1000000):
             "ch1_cw2": downsample_function(yf_full_ch1, sp, f0=f0_ch1_cw2 * 1e6, fBW=fBW * 1e6),
             "ch2_cw1": downsample_function(yf_full_ch2, sp, f0=f0_ch2_cw1 * 1e6, fBW=fBW * 1e6),
             "ch2_cw2": downsample_function(yf_full_ch2, sp, f0=f0_ch2_cw2 * 1e6, fBW=fBW * 1e6)}        
-        
+    
     if (meas_frep == True):
         fig, ax = plt.subplots(1, 2)
         ax[0].plot(np.fft.fftshift(f_grid_plot) * 1e-6, abs(np.fft.fftshift(yf_full_ch1_plot)))
@@ -146,4 +146,5 @@ def downsample_beatnotes(sp, meas_frep = True, n_plot = 1000000):
 
     plt.show()  
     
-    return BN_data, frep_data
+    # return BN_data, frep_data
+    return BN_data

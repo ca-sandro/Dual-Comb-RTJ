@@ -23,7 +23,6 @@ if(config == 1):
 
     # Processing settings
     downsample_BN = False # Select if we have to downsample the data (needs to be done only once)
-    meas_frep = False # Select if frep should also be determined experimentally
     flip_BN_order = False # Select if order of beat-notes should be flipped
 
     # Measurement parameters
@@ -33,7 +32,6 @@ ch1_filename_stem =  r'C1' + filename_core
 ch2_filename_stem =  r'C2' + filename_core
 IGM_filename_stem =  r'C3' + filename_core
 BN_filename_stem = r'BN' + filename_core 
-frep_filename_stem = r'frep' + filename_core 
 
 sp = dcd.SimParameters(f_rep                    = 1041e6,
                        Df_rep_approx            = 20e3,   # needed to do preprocessing steps where Df is found more accurately
@@ -53,12 +51,22 @@ model = dcd.DataProcessCore(sp)
 
 # %%
 BN_filename = BN_filename_stem + r'.pickle'
+
+if (downsample_BN == True):
+    BN_data = DS.downsample_beatnotes(sp, n_plot=1000000)
+    with open(dir_data / BN_filename, 'wb') as f:
+        pickle.dump(BN_data, f)
+else:
+    BN_data = pickle.load(open(dir_data / BN_filename, 'rb'))
+
+"""
+# Experimental: Get frep data
+meas_frep = True # Enable experimental determination of f_rep
+frep_filename_stem = r'frep' + filename_core 
 frep_filename = frep_filename_stem + r'.pickle'
 
 if (downsample_BN == True):
-    BN_data, frep_data = DS.downsample_beatnotes(sp, meas_frep=meas_frep, n_plot=1000000)
-    with open(dir_data / BN_filename, 'wb') as f:
-        pickle.dump(BN_data, f)
+    BN_data, frep_data = DS.downsample_beatnotes(sp, n_plot=1000000, meas_frep=meas_frep)
     
     with open(dir_data / frep_filename, 'wb') as f:
         pickle.dump(frep_data, f)
@@ -69,18 +77,16 @@ else:
         frep_data = pickle.load(open(dir_data / frep_filename, 'rb'))
     else:
         frep_data = None
+"""
 
 # %% apply IGM data to calculate Df phase
 BN_analysis = bnd.DataProcess(dir_data, 
                    BN_data, 
-                   frep_data = frep_data,
                    flip_BN_order = flip_BN_order,
                    plot_on=False)
 
 BN_analysis.beatnote_diff(plot_on = False)
-BN_analysis.calculate_Df_DN(np.array(model.t_norm_vec),  
-                            frep_data = frep_data,
-                            f_shift_if_negative = False)
+BN_analysis.calculate_Df_DN(np.array(model.t_norm_vec))
 
 # %% plot PN-PSD and TJ-PSD
 phi_scaled = BN_analysis.BN_double['phi_vec_prod']/BN_analysis.BN_double['N_cw_lines']

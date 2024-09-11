@@ -180,7 +180,6 @@ class DataProcess:
         self.frep_data = [None]*2
 
         # Iterate through the two channels with different f_rep
-        print(frep_data)
         for ind in range(2):
             # Load data
             if (ind == 0):
@@ -252,7 +251,7 @@ class DataProcess:
             ax.plot(t_grid_shift, BN_prod[1]['phi_vec_shift'])
             ax.plot(t_grid_shift, BN_double['phi_vec_shift'])
 
-    def calculate_Df_DN(self, tpk_vec, frep_data, f_shift_if_negative = False):
+    def calculate_Df_DN(self, tpk_vec, frep_data = None, f_shift_if_negative = False):
         f0_orig_sum_vec = np.array([x['f0_original_sum'] for x in self.BN_prod])
         f0_BN_diff = f0_orig_sum_vec[0] + f0_orig_sum_vec[1] * self.BN_double['conj_sign']
         
