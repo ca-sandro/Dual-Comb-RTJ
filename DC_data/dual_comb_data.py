@@ -22,12 +22,12 @@ class SimParameters(basics.functions.ParametersInterface):
                          'nt'
                          ]
         
-        DEFAULT_VALS = {'N_PREPROCESS_MAX'      : 10,     # approximate number of interferograms to analyze to infer IGM properties
+        DEFAULT_VALS = {'N_PREPROCESS_MAX'      : 6,     # approximate number of interferograms to analyze to infer IGM properties
                         'N_PROCESS_MAX'         : np.inf, # how many periods to process
                         'PREPROCESS_PEAK_TOL'   : 0.1,    # How much are peaks separated (in x * Dfrep), input to scipy.signal.find_peaks(distance = )
                         'PREPROCESS_PEAK_HEIGHT': 0.5,    # How high are peaks (in x * max_height), input to scipy.signal.find_peaks(height = )
                         'PREPROCESS_PEAK_FLUC'  : 1e-2,   # Maximum amont of fluctuation in estimated peaks (used as sanity-check)
-                        'PROCESS_PEAK_POW'      : 4,      # Power in peak search using center-of-mass
+                        'PROCESS_PEAK_POW'      : 2,      # Power in peak search using center-of-mass
                         'N_PERIODS_DF_AV_MAX'   : 10,     # How many periods to average to estimate Df_rep
 
                         'PEAK_SEARCH_TOL'       : 1e-2,   # Region (x * 1/Dfrep) to serach for next peak with coarse peak search (based on scipy.signal.find_peaks())
