@@ -10,21 +10,29 @@ import DC_data.spectrum_downsample as DS
 
 config = 1
 if(config == 1):
-    # Path
+    # Step 1)
     dir_data = Path(r'Desktop/Noise_Manual/2024_09_11_Beatnote_Evaluation/data/proc') # Path
+
+    # Step 2)
     filename_core = '--trace20khz--00003' # Filename stem
 
-    # Processing paramters:
-    f_rep = 1041e6 # Repetition rate of the laser
+    # Step 3)
+    # Processing parameters:
+    f_rep_approx = 1041e6 # Repetition rate of the laser
     D_frep_approx = 20e3 # Repetition rate difference of the laser
-    dt = 2.000000026702864 * 1e-10 # Sampling time of oscilloscope
+    dt = 2.000000026702864 * 1e-10 # Sampling time-step of oscilloscope
     nt = 50000002 # Number of points in trace
     
-    downsample_BN = True # Select if we have to downsample the data (needs to be done once in the begining)
+    # Step 4)
+    downsample_BN = False # Select if we have to downsample the data (needs to be done once in the begining)
 
+    # Step 5)
     # If does not work due to issues with difference of beatnotes:
     flip_BN_order = True # (A): Select if order of beat-notes should be flipped
-    select_higher_BN = True # (B): Select if higher-frequency beat-notes can be used, in this case need to select downsample_BN = True
+
+    # Step 6)
+    # If the flipping did not help, need to slect BN at higher frequencies > frep/2
+    select_higher_BN = False # (B): Select if higher-frequency beat-notes can be used, in this case need to select downsample_BN = True
 
 
 # %% Construct the full file names
@@ -34,7 +42,7 @@ IGM_filename_stem =  r'C3' + filename_core
 BN_filename_stem = r'BN' + filename_core 
 
 # Store measurement parameters
-sp = dcd.SimParameters(f_rep                    = f_rep,
+sp = dcd.SimParameters(f_rep                    = f_rep_approx,
                        Df_rep_approx            = D_frep_approx,  
                        file_stem_IGM            = dir_data / IGM_filename_stem, 
                        file_stem_ch1            = dir_data / ch1_filename_stem, 
