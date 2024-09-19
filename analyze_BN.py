@@ -101,5 +101,5 @@ TJ_PSD = basics.noise_analysis.TJ_PSD(phi_scaled,
                                       N_segment_scale = 1, 
                                       f0 = model.sp.f_rep,
                                       smooth_method = 'welch')
-TJ_PSD.plot_PSD(fignum = 201)
+TJ_PSD.plot_PSD(fignum = 201, xlims = [1/(dt * nt), 1000000])
 plt.show()
