@@ -5,18 +5,18 @@ To execute the code:
 
 The files need to be named according to the following system:
 
-- First channel with beatnotes:  'C1' + filename_core + '.npy'
-- Second channel with beatnotes: 'C2' + filename_core + '.npy'
-- Interferograms:                'C3' + filename_core + '.npy'
+- Interferograms:                'C1' + filename_core + '.npy'
+- First comb with beatnotes:  'C2' + filename_core + '.npy'
+- Second comb with beatnotes: 'C3' + filename_core + '.npy'
 
 the filename_core can be any string.
 
 Example:
 filename_core = '_trace':
 
-- First channel:  'C1_trace.npy'
-- Second channel: 'C2_trace.npy'
-- Interferograms: 'C3_trace.npy'
+- Interferograms: 'C1_trace.npy'
+- First comb with beatnotes:  'C2_trace.npy'
+- Second comb with beatnotes: 'C3_trace.npy'
 
 3) Provide the processing parameters:
  

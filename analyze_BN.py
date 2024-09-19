@@ -36,9 +36,9 @@ if(config == 1):
 
 
 # %% Construct the full file names
-ch1_filename_stem =  r'C1' + filename_core
-ch2_filename_stem =  r'C2' + filename_core
-IGM_filename_stem =  r'C3' + filename_core
+IGM_filename_stem =  r'C1' + filename_core
+ch1_filename_stem =  r'C2' + filename_core
+ch2_filename_stem =  r'C3' + filename_core
 BN_filename_stem = r'BN' + filename_core 
 
 # Store measurement parameters
