@@ -50,19 +50,19 @@ def downsample_beatnotes(sp, select_higher_BN, n_plot = 1000000, meas_frep = Fal
         f_lim = sp.f_rep/2
         
     fig, ax = plt.subplots(1, 2)
-    ax[0].plot(np.fft.fftshift(f_grid_plot) * 1e-6, abs(np.fft.fftshift(yf_full_ch1_plot)))
+    ax[0].plot(np.fft.fftshift(f_grid_plot) * 1e-6, abs(np.fft.fftshift(yf_full_ch1_plot)), color='red')
     ax[0].set_xlim(0, f_lim * 1e-6)
     ax[0].set_yscale('log')
     ax[0].set_xlabel('RF Frequency (MHz)')
     ax[0].set_ylabel('Amplitude (a.u.)')
     ax[0].set_title('Channel 1')
 
-    ax[1].plot(np.fft.fftshift(f_grid_plot) * 1e-6, abs(np.fft.fftshift(yf_full_ch2_plot)))
+    ax[1].plot(np.fft.fftshift(f_grid_plot) * 1e-6, abs(np.fft.fftshift(yf_full_ch2_plot)), color='blue')
     ax[1].set_xlim(0, f_lim * 1e-6)
     ax[1].set_yscale('log')
     ax[1].set_xlabel('RF Frequency (MHz)')
     ax[1].set_ylabel('Amplitude (a.u.)')
-    ax[0].set_title('Channel 2')
+    ax[1].set_title('Channel 2')
     plt.show()
 
     f0_ch1_cw1 = float(input("Center frequency (channel 1, beat-note 1) (in MHz): \n"))
@@ -111,10 +111,10 @@ def downsample_beatnotes(sp, select_higher_BN, n_plot = 1000000, meas_frep = Fal
     # Plot downsampled data
     t_grid = np.arange(0, BN_data['ch1_cw1']['nt']) * BN_data['ch1_cw1']['dt']
     fig, ax = plt.subplots(2, 2)
-    ax[0,0].plot(t_grid * 1e3, np.gradient(np.unwrap(np.angle(BN_data['ch1_cw1']["y_downsampled"]))))
-    ax[1,0].plot(t_grid * 1e3, np.gradient(np.unwrap(np.angle(BN_data['ch1_cw2']["y_downsampled"]))))
-    ax[0,1].plot(t_grid * 1e3, np.gradient(np.unwrap(np.angle(BN_data['ch2_cw1']["y_downsampled"]))))
-    ax[1,1].plot(t_grid * 1e3, np.gradient(np.unwrap(np.angle(BN_data['ch2_cw2']["y_downsampled"]))))
+    ax[0,0].plot(t_grid * 1e3, np.gradient(np.unwrap(np.angle(BN_data['ch1_cw1']["y_downsampled"]))), color = 'red')
+    ax[1,0].plot(t_grid * 1e3, np.gradient(np.unwrap(np.angle(BN_data['ch1_cw2']["y_downsampled"]))), color = 'red')
+    ax[0,1].plot(t_grid * 1e3, np.gradient(np.unwrap(np.angle(BN_data['ch2_cw1']["y_downsampled"]))), color = 'blue')
+    ax[1,1].plot(t_grid * 1e3, np.gradient(np.unwrap(np.angle(BN_data['ch2_cw2']["y_downsampled"]))), color = 'blue')
     
     ax[0,0].set_xlabel('Time (ms)')
     ax[0,1].set_xlabel('Time (ms)')
@@ -125,14 +125,17 @@ def downsample_beatnotes(sp, select_higher_BN, n_plot = 1000000, meas_frep = Fal
     ax[0,1].set_ylabel(r'Gradient[$\phi$(t)]')
     ax[1,0].set_ylabel(r'Gradient[$\phi$(t)]')
     ax[1,1].set_ylabel(r'Gradient[$\phi$(t)]')
+
+    ax[0,0].set_title('Channel 1')
+    ax[0,1].set_title('Channel 2')
     plt.show()
     
     f_grid = np.fft.fftfreq(BN_data['ch1_cw1']['nt'], BN_data['ch1_cw1']['dt'])
     fig2, ax2 = plt.subplots(2, 2) 
-    ax2[0,0].plot(np.fft.fftshift(f_grid) * 1e-6, np.fft.fftshift(np.abs(np.fft.fft(BN_data['ch1_cw1']["y_downsampled"]))))
-    ax2[1,0].plot(np.fft.fftshift(f_grid) * 1e-6, np.fft.fftshift(np.abs(np.fft.fft(BN_data['ch1_cw2']["y_downsampled"]))))
-    ax2[0,1].plot(np.fft.fftshift(f_grid) * 1e-6, np.fft.fftshift(np.abs(np.fft.fft(BN_data['ch2_cw1']["y_downsampled"]))))
-    ax2[1,1].plot(np.fft.fftshift(f_grid) * 1e-6, np.fft.fftshift(np.abs(np.fft.fft(BN_data['ch2_cw2']["y_downsampled"]))))
+    ax2[0,0].plot(np.fft.fftshift(f_grid) * 1e-6, np.fft.fftshift(np.abs(np.fft.fft(BN_data['ch1_cw1']["y_downsampled"]))), color= 'red')
+    ax2[1,0].plot(np.fft.fftshift(f_grid) * 1e-6, np.fft.fftshift(np.abs(np.fft.fft(BN_data['ch1_cw2']["y_downsampled"]))), color= 'red')
+    ax2[0,1].plot(np.fft.fftshift(f_grid) * 1e-6, np.fft.fftshift(np.abs(np.fft.fft(BN_data['ch2_cw1']["y_downsampled"]))), color= 'blue')
+    ax2[1,1].plot(np.fft.fftshift(f_grid) * 1e-6, np.fft.fftshift(np.abs(np.fft.fft(BN_data['ch2_cw2']["y_downsampled"]))), color= 'blue')
     
     ax2[0,0].set_yscale('log')
     ax2[1,0].set_yscale('log')
@@ -149,6 +152,8 @@ def downsample_beatnotes(sp, select_higher_BN, n_plot = 1000000, meas_frep = Fal
     ax2[1,0].set_ylabel('Amplitude (a.u.)')
     ax2[1,1].set_ylabel('Amplitude (a.u.)')
 
+    ax2[0,0].set_title('Channel 1')
+    ax2[0,1].set_title('Channel 2')
     plt.show()  
     
     # return BN_data, frep_data

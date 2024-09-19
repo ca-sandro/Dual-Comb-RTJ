@@ -186,7 +186,7 @@ class TJ_PSD(NoiseSpectrum):
         
         fig, ax = plt.subplots(2, 1, num = fignum, clear=True)        
         ax[0].plot(self.f_PSD, self.PSD  * 1e30,'-')
-        ax[0].set_ylabel('TJ-PSD (fs^2/Hz)')
+        ax[0].set_ylabel(r'TJ-PSD ($\mathrm{fs}^2$/Hz)')
         
         ax[1].plot(self.f_PSD, self.PSD_integrated * 1e15,'-')
         ax[1].set_ylabel('Integrated TJ (fs)')
