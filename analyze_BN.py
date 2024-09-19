@@ -11,10 +11,10 @@ import DC_data.spectrum_downsample as DS
 config = 1
 if(config == 1):
     # Step 1)
-    dir_data = Path(r'Desktop/Noise_Manual/2024_09_11_Beatnote_Evaluation/data/proc') # Path
+    dir_data = Path(r'Desktop/Noise_Manual/2024_09_11_Beatnote_Evaluation/data/trimmed') # Path
 
     # Step 2)
-    filename_core = '--trace20khz--00003' # Filename stem
+    filename_core = '_trace' # Filename stem
 
     # Step 3)
     # Processing parameters:
