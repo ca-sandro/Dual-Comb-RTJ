@@ -18,7 +18,11 @@ class NoiseSpectrum:
 
         if(smooth_method is None):
             core_algorithm = 'fft'
-            self.N_smooth_fft = kwargs['N_smooth_fft']
+
+            if ('N_smooth_fft' in kwargs):
+                self.N_smooth_fft = kwargs['N_smooth_fft']
+            else:
+                self.N_smooth_fft = None
             
         elif(smooth_method == 'welch'):
             core_algorithm = 'welch'

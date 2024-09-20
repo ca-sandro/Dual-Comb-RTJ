@@ -98,8 +98,6 @@ phi_scaled = BN_analysis.BN_double['phi_vec_prod']/BN_analysis.BN_double['N_cw_l
 
 TJ_PSD = basics.noise_analysis.TJ_PSD(phi_scaled, 
                                       BN_analysis.dt, 
-                                      N_segment_scale = 1, 
-                                      f0 = model.sp.f_rep,
-                                      smooth_method = 'welch')
+                                      f0 = model.sp.f_rep)
 TJ_PSD.plot_PSD(fignum = 201, xlims = [1/(dt * nt), 1000000])
 plt.show()
