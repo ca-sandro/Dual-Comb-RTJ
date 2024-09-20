@@ -21,14 +21,14 @@ if(config == 1):
     f_rep_approx = 1041e6 # Repetition rate of the laser
     D_frep_approx = 20e3 # Repetition rate difference of the laser
     dt = 2.000000026702864 * 1e-10 # Sampling time-step of oscilloscope
-    nt = 50000002 # Number of points in trace
+    nt = 10000000 # Number of points in trace
     
     # Step 4)
     downsample_BN = False # Select if we have to downsample the data (needs to be done once in the begining)
 
     # Step 5)
     # If does not work due to issues with difference of beatnotes:
-    flip_BN_order = True # (A): Select if order of beat-notes should be flipped
+    flip_BN_order = False # (A): Select if order of beat-notes should be flipped
 
     # Step 6)
     # If the flipping did not help, need to slect BN at higher frequencies > frep/2
