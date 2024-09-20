@@ -1,2 +1,3 @@
 basics/__pycache__
 DC_data/__pycache__
+example_data/*.pickle
