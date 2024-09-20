@@ -11,7 +11,7 @@ import DC_data.spectrum_downsample as DS
 config = 1
 if(config == 1):
     # Step 1)
-    dir_data = Path(r'Desktop/Noise_Manual/2024_09_11_Beatnote_Evaluation/data/trimmed') # Path
+    dir_data = Path(r'data') # Path
 
     # Step 2)
     filename_core = '_trace' # Filename stem
