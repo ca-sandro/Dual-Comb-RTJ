@@ -102,7 +102,7 @@ class DataProcessCore:
                 tpk_norm_curr = pk_idx + self.find_tpk_refined_IGM(y[idx_vec_curr])
                 
                 # append to vector of *true* arrival times
-                tpk_norm_refined.append(tpk_norm_curr)                                  
+                tpk_norm_refined.append(tpk_norm_curr)   
         
         self.trigger_presearch = {}
         self.trigger_presearch['tpk_norm'] = tpk_norm_refined
