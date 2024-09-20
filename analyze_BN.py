@@ -11,7 +11,7 @@ import DC_data.spectrum_downsample as DS
 config = 1
 if(config == 1):
     # Step 1)
-    dir_data = Path(r'data') # Path
+    dir_data = Path(r'example_data') # Path
 
     # Step 2)
     filename_core = '_trace' # Filename stem
