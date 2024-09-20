@@ -1,12 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon May 18 16:21:51 2020
-
-@author: Chris Phillips
-
-various basic / generic functions
-
-"""
 import copy
 import numpy as np
 from scipy.interpolate import interp1d

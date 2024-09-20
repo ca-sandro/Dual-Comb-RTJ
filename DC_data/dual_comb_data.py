@@ -1,6 +1,3 @@
-"""
-@author: Chris Phillips
-"""
 import copy
 import json
 

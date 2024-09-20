@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Jul 13 09:33:30 2022
-
-@author: Chris Phillips
-"""
-
 import numpy as np
 from scipy.interpolate import interp1d
 import matplotlib.pyplot as plt
