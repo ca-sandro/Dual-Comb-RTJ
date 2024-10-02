@@ -21,7 +21,6 @@ if(config == 1):
     f_rep_approx = 1041e6 # Repetition rate of the laser
     D_frep_approx = 20e3 # Repetition rate difference of the laser
     dt = 2.000000026702864 * 1e-10 # Sampling time-step of oscilloscope
-    nt = 10000000 # Number of points in trace
     
     # Step 4)
     downsample_BN = False # Select if we have to downsample the data (needs to be done once in the begining)
