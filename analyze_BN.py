@@ -20,8 +20,7 @@ if(config == 1):
     # Processing parameters:
     f_rep_approx = 1041e6 # Repetition rate of the laser
     D_frep_approx = 20e3 # Repetition rate difference of the laser
-    dt = 2.000000026702864 * 1e-10 # Sampling time-step of oscilloscope
-    nt = 10000000 # Number of points in trace
+    dt = 1 * 1e-9 # Sampling time-step of oscilloscope
     
     # Step 4)
     downsample_BN = False # Select if we have to downsample the data (needs to be done once in the begining)
@@ -48,7 +47,6 @@ sp = dcd.SimParameters(f_rep                    = f_rep_approx,
                        file_stem_ch1            = dir_data / ch1_filename_stem, 
                        file_stem_ch2            = dir_data / ch2_filename_stem, 
                        dt                       = dt,
-                       nt                       = nt
                        )
 
 model = dcd.DataProcessCore(sp)
@@ -99,5 +97,5 @@ phi_scaled = BN_analysis.BN_double['phi_vec_prod']/BN_analysis.BN_double['N_cw_l
 TJ_PSD = basics.noise_analysis.TJ_PSD(phi_scaled, 
                                       BN_analysis.dt, 
                                       f0 = model.sp.f_rep)
-TJ_PSD.plot_PSD(fignum = 201, xlims = [1/(dt * nt), 1000000])
+TJ_PSD.plot_PSD(fignum = 201, xlims = [1/(dt * model.sp.nt), 1000000])
 plt.show()

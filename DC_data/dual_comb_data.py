@@ -15,8 +15,7 @@ class SimParameters(basics.functions.ParametersInterface):
                          'file_stem_IGM',
                          'file_stem_ch1',
                          'file_stem_ch2',
-                         'dt', 
-                         'nt'
+                         'dt'
                          ]
         
         DEFAULT_VALS = {'N_PREPROCESS_MAX'      : 6,     # approximate number of interferograms to analyze to infer IGM properties
@@ -53,17 +52,19 @@ class DataProcessCore:
         # place characteristic info about trigger into self.trig
         self.trigger_properties = {}
 
+        self.trigger_data_file = self.sp.file_stem_IGM.parent / (self.sp.file_stem_IGM.name + '.npy')
+        
+        # load data from mmap to avoid loading whole trace
+        y_mmap = np.load(self.trigger_data_file, mmap_mode='r+')
+        self.sp.nt = len(y_mmap)
+
         # determine number of points to load for preprocessing routine
         t_range_preproc = np.abs(self.sp.N_PREPROCESS_MAX / self.sp.Df_rep_approx)
         n_temp = np.min([np.round(t_range_preproc / self.sp.dt), self.sp.nt])
         nt_load = int(2*np.floor(n_temp/2))
         
-        if(nt_load > 1e7):
-            print('Warning: {} M data points in preprocessing step'.format(nt_load*1e-6))
-        self.trigger_data_file = self.sp.file_stem_IGM.parent / (self.sp.file_stem_IGM.name + '.npy')
+
         
-        # load data from mmap to avoid loading whole trace
-        y_mmap = np.load(self.trigger_data_file, mmap_mode='r+')
         y = y_mmap[:nt_load] + 0 
 
         # define frequency grid for the data segment loaded

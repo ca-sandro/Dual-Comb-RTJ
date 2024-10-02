@@ -29,10 +29,12 @@ def downsample_function(yf_full, sp, f0, fBW):
 
     return DS_data
 
-def downsample_beatnotes(sp, select_higher_BN, n_plot = 1000000, meas_frep = False):  
+def downsample_beatnotes(sp, select_higher_BN, n_plot = 5000, meas_frep = False):  
     #sp.nt = 1000000
     
     y_mmap = np.load(sp.file_stem_ch1.parent / (sp.file_stem_ch1.name + '.npy'), mmap_mode='r+')
+    sp.nt = len(y_mmap)
+    
     y_data_ch1 = y_mmap[:sp.nt] + 0 
 
     y_mmap = np.load(sp.file_stem_ch2.parent / (sp.file_stem_ch2.name + '.npy'), mmap_mode='r+')
